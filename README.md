@@ -13,6 +13,7 @@ Polymorphism
 * Polymorphism is used in methods like calculateTotal(), which works differently for regular orders and special promotions. Overriding allows a child class to provide its version of a method, enhancing flexibility.
 
 * Abstraction
+  
 Abstract classes and interfaces are used to define a framework for operations like Payment or Donation, leaving the details to be implemented by specific classes.
 
 III. Details of the chosen SDG and its integration into the project
