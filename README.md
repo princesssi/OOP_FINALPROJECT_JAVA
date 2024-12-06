@@ -11,9 +11,9 @@ II. Explanation of how OOP principles were applied
 Polymorphism
 
 * Polymorphism is used in methods like calculateTotal(), which works differently for regular orders and special promotions. Overriding allows a child class to provide its version of a method, enhancing flexibility.
-Abstraction
 
-* Abstract classes and interfaces are used to define a framework for operations like Payment or Donation, leaving the details to be implemented by specific classes.
+* Abstraction
+Abstract classes and interfaces are used to define a framework for operations like Payment or Donation, leaving the details to be implemented by specific classes.
 
 III. Details of the chosen SDG and its integration into the project
 - This project integrates SDG 2: Zero Hunger by offering customers the option to donate to food programs after completing their orders. By incorporating this feature, the system helps raise awareness about global hunger and provides an easy way for users to contribute to the cause.
