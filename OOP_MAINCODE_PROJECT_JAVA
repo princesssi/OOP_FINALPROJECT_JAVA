@@ -27,7 +27,6 @@ public class RestaurantGUI {
         frame.setSize(800, 600);
         frame.setLayout(new BorderLayout());
     
-        // Create a welcome panel
         JPanel welcomePanel = new JPanel();
         welcomePanel.setLayout(new GridBagLayout());
         GridBagConstraints gbc = new GridBagConstraints();
@@ -139,32 +138,26 @@ public class RestaurantGUI {
         frame.getContentPane().removeAll(); // Clear existing content
         frame.setLayout(new BorderLayout());
     
-        // Create and style the Menu label
         JLabel menuLabel = new JLabel("MENU", SwingConstants.CENTER);
         menuLabel.setFont(new Font("Arial", Font.BOLD, 36));  // Set the font size
         menuLabel.setForeground(new Color(153, 51, 0)); // Set the color to match theme
         frame.add(menuLabel, BorderLayout.NORTH);
     
-        // Create a panel for the categories using GridLayout (2 rows, 2 columns)
         JPanel menuPanel = new JPanel(new GridLayout(2, 2, 20, 20)); // 2x2 grid layout with spacing
         menuPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Add padding to the panel
     
-        // Create category panels
         JPanel mainCoursesPanel = createCategoryPanel("Main Courses", new Class[]{MainCourse.class});
         JPanel appetizersPanel = createCategoryPanel("Appetizers", new Class[]{Appetizer.class});
         JPanel dessertsPanel = createCategoryPanel("Desserts", new Class[]{Dessert.class});
         JPanel drinksPanel = createCategoryPanel("Drinks", new Class[]{Drink.class});
     
-        // Add the category panels to the grid (ensure placement order)
         menuPanel.add(mainCoursesPanel); // Left top
         menuPanel.add(appetizersPanel);  // Right top
         menuPanel.add(dessertsPanel);    // Left bottom
         menuPanel.add(drinksPanel);      // Right bottom
     
-        // Add the menu panel to the frame
         frame.add(menuPanel, BorderLayout.CENTER);
     
-        // Buttons for actions
         JButton placeOrderButton = new JButton("Place Order");
         JButton backButton = new JButton("Back");
     
@@ -178,7 +171,6 @@ public class RestaurantGUI {
     
         backButton.addActionListener(e -> createMainFrame()); // Navigate back to welcome screen
     
-        // Add buttons to a panel
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(placeOrderButton);
         buttonPanel.add(backButton);
@@ -211,7 +203,6 @@ public class RestaurantGUI {
             }
         }
         
-        // Add the donation amount to the total donations
         totalDonations += donationAmount;
         
         // Display the receipt
@@ -227,7 +218,6 @@ public class RestaurantGUI {
             Orderable item = entry.getValue();
             if (itemClasses[0].isAssignableFrom(item.getClass())) {
 
-                // Add the item to the panel (with mouse listener to add to cart)
                 String itemName = item.getItemName();
                 String price = "PHP " + item.getPrice();
                 JPanel itemPanel = new JPanel(new FlowLayout(FlowLayout.LEFT)); // Align items to the left
@@ -275,15 +265,12 @@ public class RestaurantGUI {
         JScrollPane scrollPane = new JScrollPane(receiptArea);
         receiptPanel.add(scrollPane, BorderLayout.CENTER);
     
-        // Buttons for navigation
         JPanel buttonPanel = new JPanel();
         JButton backToMenuButton = new JButton("Back to Menu");
         JButton nextButton = new JButton("Next");
     
-        // Back button action
         backToMenuButton.addActionListener(e -> showMenuFrame(null, frame)); // Go back to menu frame
     
-        // Next button action
         nextButton.addActionListener(e -> showThankYouMessage(frame)); // Go to thank-you message screen
     
         buttonPanel.add(backToMenuButton);
@@ -291,7 +278,6 @@ public class RestaurantGUI {
     
         receiptPanel.add(buttonPanel, BorderLayout.SOUTH);
     
-        // Clear the existing content and add the receipt panel
         frame.getContentPane().removeAll();
         frame.getContentPane().add(receiptPanel);
         frame.revalidate();
@@ -313,11 +299,9 @@ public class RestaurantGUI {
         JLabel donationMessage = new JLabel("Your donation helps combat hunger and supports food programs.");
         donationMessage.setFont(new Font("Arial", Font.PLAIN, 16));
     
-        // "Next" button to proceed to log-out or new-order options
         JButton nextButton = new JButton("Next");
         nextButton.addActionListener(e -> showLogOutOrOrderAgain(frame));
     
-        // Add components to the panel
         thankYouPanel.add(thankYouMessage, gbc);
         thankYouPanel.add(donationMessage, gbc);
         thankYouPanel.add(nextButton, gbc);
@@ -343,16 +327,13 @@ public class RestaurantGUI {
         JButton orderAgainButton = new JButton("Order Again");
     
         logOutButton.addActionListener(e -> {
-            // Clear any user or order data
             currentOrder = null;
             currentCustomer = null;
             
-            // Reset the frame content to the welcome screen
             frame.getContentPane().removeAll(); // Remove current content
             frame.revalidate(); // Refresh the frame
             frame.repaint();
             
-            // Reuse the existing frame for the welcome screen
             createMainFrame(); // Navigate back to the welcome screen
         });                                
     
@@ -497,17 +478,13 @@ class Order {
     public String displayReceipt(double donations, Customer customer, double totalDonations) {
         StringBuilder receipt = new StringBuilder();
         
-        // Define the total width of the receipt (e.g., 40 characters)
         int totalLength = 40;
         String header = "RECEIPT";
         
-        // Calculate spaces required to center the header
         int spaces = (totalLength - header.length()) / 2;
         
-        // Build the centered header with bold "RECEIPT"
         String centeredHeader = String.format("%" + (spaces + header.length()) + "s", header);
         
-        // Add the centered and bolded header to the receipt
         receipt.append(centeredHeader).append("\n");
     
         // List ordered items with their quantity and price
@@ -518,26 +495,21 @@ class Order {
                    .append("\n");
         }
     
-        // Calculate total order price
         double orderTotal = calculateTotal();
         receipt.append("\nTotal (Order): PHP ").append(String.format("%.2f", orderTotal)).append("\n");
     
-        // Conditionally add donation details to the receipt if there's a donation
         if (donations > 0) {
             receipt.append("Total (Donation): PHP ").append(String.format("%.2f", donations)).append("\n");
         }
     
-        // Display the grand total (order total + donation) only if there's a donation
         double grandTotal = orderTotal + donations;
         receipt.append("Grand Total Amount (Order + Donation): PHP ").append(String.format("%.2f", grandTotal)).append("\n");
     
-        // Footer for customer details
         receipt.append("\nCUSTOMER DETAILS\n");
         receipt.append("Name: ").append(customer.getName()).append("\n");
         receipt.append("Address: ").append(customer.getAddress()).append("\n");
         receipt.append("Phone #: ").append(customer.getPhone()).append("\n");
     
-        // Display total donations collected so far
         receipt.append("\nTOTAL DONATIONS\n");
         receipt.append("Total Donations Collected: PHP ").append(String.format("%.2f", totalDonations + donations)).append("\n");
     
