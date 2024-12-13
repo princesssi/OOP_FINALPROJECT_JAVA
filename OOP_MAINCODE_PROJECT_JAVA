@@ -69,7 +69,7 @@ public class RestaurantGUI {
         gbc.insets = new Insets(10, 10, 10, 10);
         gbc.anchor = GridBagConstraints.CENTER;
     
-        JLabel titleLabel = new JLabel(action.toUpperCase()); // Use the action text directly
+        JLabel titleLabel = new JLabel(action.toUpperCase()); 
         titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
         frame.add(titleLabel, gbc);
     
@@ -139,11 +139,11 @@ public class RestaurantGUI {
         frame.setLayout(new BorderLayout());
     
         JLabel menuLabel = new JLabel("MENU", SwingConstants.CENTER);
-        menuLabel.setFont(new Font("Arial", Font.BOLD, 36));  // Set the font size
-        menuLabel.setForeground(new Color(153, 51, 0)); // Set the color to match theme
+        menuLabel.setFont(new Font("Arial", Font.BOLD, 36));  
+        menuLabel.setForeground(new Color(153, 51, 0)); 
         frame.add(menuLabel, BorderLayout.NORTH);
     
-        JPanel menuPanel = new JPanel(new GridLayout(2, 2, 20, 20)); // 2x2 grid layout with spacing
+        JPanel menuPanel = new JPanel(new GridLayout(2, 2, 20, 20)); 
         menuPanel.setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20)); // Add padding to the panel
     
         JPanel mainCoursesPanel = createCategoryPanel("Main Courses", new Class[]{MainCourse.class});
@@ -169,7 +169,7 @@ public class RestaurantGUI {
             }
     });
     
-        backButton.addActionListener(e -> createMainFrame()); // Navigate back to welcome screen
+        backButton.addActionListener(e -> createMainFrame()); 
     
         JPanel buttonPanel = new JPanel();
         buttonPanel.add(placeOrderButton);
@@ -212,7 +212,7 @@ public class RestaurantGUI {
     
     private static JPanel createCategoryPanel(String categoryName, Class<?>[] itemClasses) {
         JPanel categoryPanel = new JPanel(new GridLayout(0, 1)); // Each item is stacked vertically
-        categoryPanel.setBorder(BorderFactory.createTitledBorder(categoryName)); // Optional: Border around the panel
+        categoryPanel.setBorder(BorderFactory.createTitledBorder(categoryName)); 
 
         for (Map.Entry<String, Orderable> entry : menu.entrySet()) {
             Orderable item = entry.getValue();
@@ -269,9 +269,9 @@ public class RestaurantGUI {
         JButton backToMenuButton = new JButton("Back to Menu");
         JButton nextButton = new JButton("Next");
     
-        backToMenuButton.addActionListener(e -> showMenuFrame(null, frame)); // Go back to menu frame
+        backToMenuButton.addActionListener(e -> showMenuFrame(null, frame)); 
     
-        nextButton.addActionListener(e -> showThankYouMessage(frame)); // Go to thank-you message screen
+        nextButton.addActionListener(e -> showThankYouMessage(frame)); 
     
         buttonPanel.add(backToMenuButton);
         buttonPanel.add(nextButton);
@@ -330,16 +330,14 @@ public class RestaurantGUI {
             currentOrder = null;
             currentCustomer = null;
             
-            frame.getContentPane().removeAll(); // Remove current content
-            frame.revalidate(); // Refresh the frame
+            frame.getContentPane().removeAll(); 
+            frame.revalidate(); 
             frame.repaint();
             
-            createMainFrame(); // Navigate back to the welcome screen
+            createMainFrame(); 
         });                                
     
-        // Order Again button action
         orderAgainButton.addActionListener(e -> {
-            // Allow the customer to place another order
             currentOrder = null;
             showMenuFrame(null, frame);
         });
