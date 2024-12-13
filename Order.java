@@ -1,30 +1,19 @@
-import java.util.ArrayList;
+class Order {
+    private Map<Orderable, Integer> items = new HashMap<>();
 
-public class Order {
-    private Customer customer;
-    private ArrayList<FoodItem> foodItems;
-    private double totalPrice;
-
-    public Order(Customer customer) {
-        this.customer = customer;
-        this.foodItems = new ArrayList<>();
-        this.totalPrice = 0.0;
+    // Getter method to access items
+    public Map<Orderable, Integer> getItems() {
+        return items;
     }
 
-    public void addFoodItem(FoodItem item) {
-        foodItems.add(item);
-        totalPrice += item.getPrice();
+    public void addItemToCart(Orderable item, int quantity) {
+        items.put(item, items.getOrDefault(item, 0) + quantity);
     }
 
-    public double getTotalPrice() {
-        return totalPrice;
+    public double calculateTotal() {
+        double total = 0;
+        for (Map.Entry<Orderable, Integer> entry : items.entrySet()) {
+            total += entry.getKey().getPrice() * entry.getValue();
+        }
+        return total;
     }
-
-    public Customer getCustomer() {
-        return customer;
-    }
-
-    public ArrayList<FoodItem> getFoodItems() {
-        return foodItems;
-    }
-}
