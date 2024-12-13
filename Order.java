@@ -1,7 +1,9 @@
-class Order {
+import java.util.HashMap;
+import java.util.Map;
+
+public class Order {
     private Map<Orderable, Integer> items = new HashMap<>();
 
-    // Getter method to access items
     public Map<Orderable, Integer> getItems() {
         return items;
     }
@@ -17,3 +19,5 @@ class Order {
         }
         return total;
     }
+}
+
