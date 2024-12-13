@@ -1,14 +1,14 @@
-public class FoodItem {
-    private String name;
+class FoodItem implements Orderable {
+    private String itemName;
     private double price;
 
-    public FoodItem(String name, double price) {
-        this.name = name;
+    public FoodItem(String itemName, double price) {
+        this.itemName = itemName;
         this.price = price;
     }
 
-    public String getName() {
-        return name;
+    public String getItemName() {
+        return itemName;
     }
 
     public double getPrice() {
